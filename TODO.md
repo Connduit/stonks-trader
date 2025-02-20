@@ -1,0 +1,42 @@
+# TODO
+
+### ALG1 (MACD)
+
+##### Logic
+
+    func ALG1()
+        macd_diff = getMACD(); // assuming that MACD lengths and other params are already set
+
+        // bool position; // do we have an active position for the stock we're looking at 
+
+        if position == true
+            // wait till macd_diff is negative (confirmation of downtrend)
+            // maybe also check if selling at this current price will give us profits?
+            if macd_diff < 0
+                sell();
+                position = false;
+            end
+            // if macd_diff > 0 we keep holding onto our position
+        else if position == false
+            // check if macd_diff goes from negative to positive (sign of an uptrend)
+            if macd_diff > 0 && prev_macd_diff < 0 // something like this?
+                but();
+                position = true;
+            end
+            // if macd_diff < 0 we don't buy
+        end
+
+        // TODO: can also add checks for other things like rsi, sma/ema, volume, and maybe vwap?
+        // if rsi > 70% ... risky buy?
+        // if rsi < 30% ... good potential buy?
+        // if current price is below sma or ema, wait for it to break above the indicator before buying. Should also have a condition where it needs to be above indicator for X amount of time after breaking
+        // idk about volume... need to research more (TODO)
+        // idk about vwap... need to research more (TODO)
+    end
+
+### ALG2 (Scalper)
+
+##### Logic
+
+
+    TODO: Need to do research on how scalping works
