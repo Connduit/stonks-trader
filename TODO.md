@@ -57,3 +57,9 @@
 
     Strategy:
         - look at what price the stock is most commonly sold at and/or how long it stays at that price to identify support and resistance price points
+
+### Scanner1
+
+##### Strategy
+
+    - Scan for stocks that have strong bullish candles in a 1min time frame (this probs works best and is most accureate for well known companies and non-meme garabage stocks)
