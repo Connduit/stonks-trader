@@ -50,3 +50,10 @@
                 - momentum candles? (bullish engulfing candle... good indicator for a start of an uptrend). only enter after the engulfing candle closes
         - STOP LOSS = 2 times the length of the entry candle
         - TAKE PROFIT to a 2:1 ratio
+
+### ALG3 (Bounds)
+
+##### Logic
+
+    Strategy:
+        - look at what price the stock is most commonly sold at and/or how long it stays at that price to identify support and resistance price points
