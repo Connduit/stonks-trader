@@ -14,8 +14,9 @@ TODO: stuff needed to find sma
 - period (number of days)
 """
 class SMA(Indicator):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, df):
+        super().__init__(df)
+        self.df = df
 
     #def __call__(self, *args, **kwds):
         #return super().__call__(*args, **kwds)

@@ -6,5 +6,5 @@ Abstract class for indicators/studies
 
 # class Indicator(ABC):
 class Indicator:
-    def __init__(self):
-        pass
+    def __init__(self, df):
+        self.df = df

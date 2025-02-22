@@ -1,3 +1,7 @@
+from datetime import datetime
+
+from alpaca.data.historical import StockHistoricalDataClient
+from alpaca.data.requests import StockBarsRequest, TimeFrame
 from Algorithm import Algorithm
 from EngulfingCandle import engulfingCandle
 
@@ -15,16 +19,48 @@ Super Conservative Scalping Strategy:
     - TAKE PROFIT to a 2:1 ratio
 """
 class ScalperAlgorithm(Algorithm):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, api_key, api_secret, paper=True):
+        super().__init__(api_key, api_secret, paper)
         # self.risk_tolerance = HIGH, LOW, MED ??? 
         # TODO: do we want to store different conditions as boolean memeber vars?
+        self.symbol = "AAPL" # TODO: hard coded value right now for testing purposes
+        #self.symbols = ["AAPL"] # list of stocks ? basically a watchlist of potential stocks we want this alg to run on. maybe we have alg run currently on multiple stocks
 
+        #self.bars # DataFrame of market data... not sure if python makes us declare vars here 
+        #self.df # DataFrame of market data... not sure if python makes us declare vars here 
+
+
+    # get market data required for alg to work 
+    #def getMarketData(self, start_time, end_time, timeframe):
+    def getMarketData(self, start_time, end_time=datetime.now().date()):
+        request_params = StockBarsRequest(
+            symbol_or_symbols=self.symbol,
+            #timeframe=TimeFrame.Minute,
+            timeframe=TimeFrame.Day,
+            start=start_time,
+            end=end_time
+        )
+
+        self.bars = self.data_client.get_stock_bars(request_params)
+        self.df = self.bars.df.tz_convert("America/New_York", level=1)
+
+    # update market data (this might be specific for our case where we're doing intraday trading...)
+    def updateMarketData(self):
+        pass
+
+    # TODO: maybe watchlist is just made up of all stocks that meet 50% of the buy conditions? in addition to the most popular and active stocks of the day and just good reputable stocks
+    def generateWatchlist(self):
+        pass
 
     def buyConditions(self):
+        # TODO: might actuall have to call getMarketData or updateMarketData from here
+        # getCurrentEma or SMA... then check stuff against it
+        # getRSI... then check stuff
+        # engulfingCandle("Bullish")
         pass
 
     def sellConditions(self):
+        # check we that we have an active position
         pass
 
     def trade(self):
