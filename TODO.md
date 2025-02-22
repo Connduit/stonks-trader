@@ -63,3 +63,10 @@
 ##### Strategy
 
     - Scan for stocks that have strong bullish candles in a 1min time frame (this probs works best and is most accureate for well known companies and non-meme garabage stocks)
+
+
+### Testing
+
+##### Logic
+
+    - Use historical market data to test ALGS to help fine tune their performance 
