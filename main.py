@@ -30,22 +30,19 @@ bar_set = client.get_stock_bars(request)
 # Initialize the list to store closing prices
 closing_prices = []
 
-
 # Loop through the BarSet and collect the closing prices
 for symbol, bars in bar_set.data.items():
     for bar in bars:
         closing_prices.append(bar.close)
 
 # Calculate the Simple Moving Average (SMA) for a window of size n
-window_size = 10  # Example: 10-period moving average
+window_size = 21  # Example: 10-period moving average
 sma_values = []
 
-# MY TODO: pretty sure len(closing_prices) should be 2x the window_size, otherwise averages wont always be using the correct window_size as they might not have enough historical data. this specifically will happen for the days furthest from the current time
 # Make sure we have enough data to calculate the moving average
 if len(closing_prices) >= window_size:
     for i in range(window_size - 1, len(closing_prices)):
         window = closing_prices[i - window_size + 1: i + 1]
-        print(window)
         sma = np.mean(window)  # Calculate the average of the window
         sma_values.append(sma)
 
