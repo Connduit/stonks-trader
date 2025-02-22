@@ -64,5 +64,38 @@ df['200_DAY_SMA'] = df['close'].rolling(window=length).mean()
 print(df)
 
 # EMA Calculation
-df['200_DAY_EMA'] = df['close'].ewm(span=length, adjust=False).mean()
+df['200_DAY_EMA'] = df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
 print(df)
+
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Candlestick(x=df.index,
+                                     open=df['open'],
+                                     high=df['high'],
+                                     low=df['low'],
+                                     close=df['close']))
+
+fig.add_trace(go.Scatter(x=df.index,
+                         y=df['200_DAY_SMA'],
+                         mode='lines',
+                         name='200-day SMA',
+                         line=dict(color='orange', width=2)))
+
+fig.update_layout(title=f"{scalper_algorithm.symbol} Stock Price with 200-Day SMA",
+                    xaxis_title="Date",
+                    yaxis_title="Price",
+                    xaxis_rangeslider_visible=True)
+
+fig.add_trace(go.Scatter(x=df.index,
+                         y=df['200_DAY_EMA'],
+                         mode='lines',
+                         name='200-day EMA',
+                         line=dict(color='CYAN', width=2)))
+
+fig.update_layout(title=f"{scalper_algorithm.symbol} Stock Price with 200-Day EMA",
+                    xaxis_title="Date",
+                    yaxis_title="Price",
+                    xaxis_rangeslider_visible=True)
+
+fig.show()
