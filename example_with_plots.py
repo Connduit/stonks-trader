@@ -1,5 +1,6 @@
 from ScalperAlgorithm import ScalperAlgorithm
 
+import plotly.graph_objects as go
 
 import pandas as pd
 from alpaca.data.historical import StockHistoricalDataClient
@@ -51,3 +52,23 @@ df['50_day_MA'] = df['close'].rolling(window=10).mean()
 
 # Display the results
 print(df[['close', '50_day_MA']].tail())  # Show the most recent data with moving average
+
+fig = go.Figure()
+fig.add_trace(go.Candlestick(x=df.index,
+                                     open=df['open'],
+                                     high=df['high'],
+                                     low=df['low'],
+                                     close=df['close']))
+
+fig.add_trace(go.Scatter(x=df.index,
+                         y=df['50_day_MA'],
+                         mode='lines',
+                         name='20-day SMA',
+                         line=dict(color='orange', width=2)))
+
+fig.update_layout(title=f"{symbol} Stock Price with 20-Day SMA",
+                    xaxis_title="Date",
+                    yaxis_title="Price",
+                    xaxis_rangeslider_visible=True)
+
+fig.show()
