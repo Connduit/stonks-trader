@@ -3,9 +3,11 @@ from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest, TimeFrame
 import datetime
 
+import config
+
 # Configure Alpaca API keys
-API_KEY = ''
-API_SECRET = ''
+API_KEY = config.api_key
+API_SECRET = config.api_secret
 
 # Initialize Alpaca StockHistoricalDataClient with your API keys
 client = StockHistoricalDataClient(API_KEY, API_SECRET)

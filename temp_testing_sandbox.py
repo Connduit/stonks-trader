@@ -1,5 +1,6 @@
 from EngulfingCandle import engulfingCandle
 from ScalperAlgorithm import ScalperAlgorithm
+import config
 from EMA import EMA
 from SMA import SMA
 #import datetime
@@ -10,8 +11,8 @@ from alpaca.trading.requests import GetCalendarRequest
 
 
 
-api_key = ''
-api_secret = ''
+api_key = config.api_key
+api_secret = config.api_secret
 
 scalper_algorithm = ScalperAlgorithm(api_key, api_secret)
 day = timedelta(days=1)

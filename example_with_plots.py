@@ -1,4 +1,5 @@
 from ScalperAlgorithm import ScalperAlgorithm
+import config
 
 import plotly.graph_objects as go
 
@@ -9,8 +10,8 @@ from alpaca.data.models import Bar
 from alpaca.data.requests import StockQuotesRequest, StockBarsRequest
 
 # Your Alpaca API credentials
-api_key = ''
-api_secret = ''
+api_key = config.api_key
+api_secret = config.api_secret
 
 # Set up the configuration
 #config = Config(API_KEY_ID=api_key, API_SECRET_KEY=api_secret)
