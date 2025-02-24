@@ -12,6 +12,7 @@ Super Conservative Scalping Strategy:
     - ONLY take positions when the chart is in an up trend and sell after small gains
         - This should result in higher accuracy but smaller/slower growth
         - Start by using 200 day ema to determine trend of the stock (can always fine tune this by using a combination of other indicators)
+            - should also consider the volume... (when using certain days to calculate the ema, if those days have a volume way below the average maybe don't apply them to ema? for example: QBTS)
             - rsi DIVERGENCE? ONLY enter trade when rsi is above 50%
             - bullish DIVERGENCE is a bonus
             - momentum candles? (bullish engulfing candle... good indicator for a start of an uptrend). only enter after the engulfing candle closes
