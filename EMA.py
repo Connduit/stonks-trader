@@ -15,5 +15,5 @@ class EMA(Indicator):
     #def __call__(self, *args, **kwds):
         #return super().__call__(*args, **kwds)
 
-    def __call__(self):
-        pass
+    def __call__(self, length):
+        self.df[f'{length}_DAY_EMA'] = self.df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
