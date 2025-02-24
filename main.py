@@ -36,7 +36,7 @@ for symbol, bars in bar_set.data.items():
         closing_prices.append(bar.close)
 
 # Calculate the Simple Moving Average (SMA) for a window of size n
-window_size = 21  # Example: 10-period moving average
+window_size = 10  # Example: 10-period moving average
 sma_values = []
 
 # Make sure we have enough data to calculate the moving average
@@ -49,4 +49,4 @@ if len(closing_prices) >= window_size:
 # Print the results
 print(f"SMA values (window size {window_size}):")
 for i, sma in enumerate(sma_values):
-    print(f"Index {i + window_size - 1}: SMA = {sma:.2f}")
+    print(f"Index {i + window_size - 1}: SMA = {sma:.2f}") # TODO: instead of printing index here, print the datetime

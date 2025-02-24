@@ -21,7 +21,7 @@ client = StockHistoricalDataClient(api_key, api_secret)
 # Define the symbol and the timeframe
 symbol = 'AAPL'  # Example: Apple stock
 timeframe = TimeFrame.Day  # Can be 'Minute', 'Hour', 'Day', etc.
-lookback_period = 100  # Number of days to fetch
+#lookback_period = 100  # Number of days to fetch
 start_time = pd.to_datetime("2024-02-21").tz_localize("America/New_York") # TODO: start time should be current date - 1 year?
 
 request_params = StockBarsRequest(

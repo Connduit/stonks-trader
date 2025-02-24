@@ -1,10 +1,13 @@
 from EngulfingCandle import engulfingCandle
 from ScalperAlgorithm import ScalperAlgorithm
+from EMA import EMA
+from SMA import SMA
 #import datetime
 from datetime import timedelta
 from datetime import datetime
 import pandas as pd
 from alpaca.trading.requests import GetCalendarRequest
+
 
 
 api_key = ''
@@ -66,6 +69,13 @@ print(df)
 # EMA Calculation
 df['200_DAY_EMA'] = df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
 print(df)
+
+ema = EMA(df)
+ema(200)
+print(ema.df)
+
+print(ema.df.tail(1))
+#scalper_algorithm.trading_client
 
 import plotly.graph_objects as go
 

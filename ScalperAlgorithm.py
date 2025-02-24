@@ -4,6 +4,7 @@ from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest, TimeFrame
 from Algorithm import Algorithm
 from EngulfingCandle import engulfingCandle
+from EMA import EMA
 
 """
 TODO: Need to do research on how scalping works
@@ -57,6 +58,7 @@ class ScalperAlgorithm(Algorithm):
         # getCurrentEma or SMA... then check stuff against it
         # getRSI... then check stuff
         # engulfingCandle("Bullish")
+        EMA(self.df).tail(1)
         pass
 
     def sellConditions(self):
