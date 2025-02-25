@@ -1,7 +1,8 @@
 from datetime import datetime
+import time
 
 from alpaca.data.historical import StockHistoricalDataClient
-from alpaca.data.requests import StockBarsRequest, TimeFrame, StockLatestTradeRequest, StockLatestQuoteRequest
+from alpaca.data.requests import StockBarsRequest, TimeFrame, StockLatestTradeRequest, StockLatestQuoteRequest, StockLatestBarRequest
 from Algorithm import Algorithm
 from EngulfingCandle import engulfingCandle
 from EMA import EMA
@@ -19,7 +20,7 @@ Super Conservative Scalping Strategy:
             - bullish DIVERGENCE is a bonus
             - momentum candles? (bullish engulfing candle... good indicator for a start of an uptrend). only enter after the engulfing candle closes
     - STOP LOSS = 2 times the length of the entry candle
-    - TAKE PROFIT to a 2:1 ratio
+    - TAKE PROFIT to a 2:1 ratio - for every dollar ur willing to risk, u profit 2 dollars
 """
 class ScalperAlgorithm(Algorithm):
     def __init__(self, api_key, api_secret, paper=True):
@@ -35,6 +36,7 @@ class ScalperAlgorithm(Algorithm):
 
     # get market data required for alg to work 
     #def getMarketData(self, start_time, end_time, timeframe):
+    # TODO: this will not get data from the current day... might have to use api.get_latest_bars(symbol)
     def getMarketData(self, start_time, end_time=datetime.now().date()):
         request_params = StockBarsRequest(
             symbol_or_symbols=self.symbol,
@@ -46,10 +48,35 @@ class ScalperAlgorithm(Algorithm):
 
         self.bars = self.data_client.get_stock_bars(request_params)
         self.df = self.bars.df.tz_convert("America/New_York", level=1)
+        rq = StockLatestBarRequest(symbol_or_symbols=self.symbol)
+        temp = self.data_client.get_stock_latest_bar(rq)
+        print(temp)
+        #self.df.concat([self.df, temp], ignore_index=True)
+        #self.data_client.get_bar
 
     # update market data (this might be specific for our case where we're doing intraday trading...)
-    def updateMarketData(self):
-        pass
+    # TODO: add start_time and end_time as params
+    # TODO: this function needs to be running concurrently?
+    def updateMarketData(self, end_time = datetime.now().date()):
+        from datetime import timedelta
+        #start_time = end_time - timedelta(days=1)
+        start_time = datetime(2025, 2, 21)
+        while True:
+            #end_time = datetime.now().date()
+            end_time = datetime.now()
+            request_params = StockBarsRequest(
+                symbol_or_symbols=self.symbol,
+                timeframe=TimeFrame.Minute,
+                start=start_time,
+                end=end_time
+            )
+            minute_bars = self.data_client.get_stock_bars(request_params=request_params)
+            latest_bar = minute_bars[self.symbol][-1]
+            self.bars[self.symbol].append(latest_bar)
+            self.df = self.bars.df.tz_convert("America/New_York", level=1) # TODO: check if we are in normal trading hours... might have to do this check somewhere else
+            #time.sleep(60)
+            time.sleep(5)
+            break
 
     # TODO: maybe watchlist is just made up of all stocks that meet 50% of the buy conditions? in addition to the most popular and active stocks of the day and just good reputable stocks
     def generateWatchlist(self):
@@ -74,6 +101,7 @@ class ScalperAlgorithm(Algorithm):
 
 
         rsi = RSI(self.df)
+        rsi(rsi_length)
         #print({rsi(rsi_length).tail(1)}) TODO: could just do this instead because we're returning from RSI.__call__()
         #print(rsi.df.tail(1)['close'].values)
         #print(rsi.df.tail(1)['close'].iloc[-1])

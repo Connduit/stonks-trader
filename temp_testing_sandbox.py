@@ -15,7 +15,7 @@ api_key = config.api_key
 api_secret = config.api_secret
 
 scalper_algorithm = ScalperAlgorithm(api_key, api_secret)
-day = timedelta(days=1)
+day = timedelta(days=365)
 end_time = datetime.now().date()
 start_time = end_time - day
 
@@ -39,10 +39,11 @@ start_time = end_time - day
 
 # TODO: this is only testing on historical data... eventually we want to actively update the market data as we continue throughout the current day
 #start_time = datetime(2025, 2, 20) # TODO: hard coded for quick testing purposes... change later
-start_time = datetime(2024, 2, 21) # TODO: hard coded for quick testing purposes... change later
-end_time = datetime(2025, 2, 21) # TODO: hard coded for quick testing purposes... change later
+#start_time = datetime(2024, 2, 21) # TODO: hard coded for quick testing purposes... change later
+#end_time = datetime(2025, 2, 21) # TODO: hard coded for quick testing purposes... change later
 
 scalper_algorithm.getMarketData(start_time)
+scalper_algorithm.updateMarketData()
 #print(scalper_algorithm.bars)
 import btalib
 print(scalper_algorithm.bars.df)
@@ -80,7 +81,9 @@ print(df)
 scalper_algorithm.buyConditions()
 
 # TODO: remove this return
-exit()
+
+df = scalper_algorithm.df
+#df.set_index('time', inplace=True) # sort by time
 
 import plotly.graph_objects as go
 
@@ -91,11 +94,13 @@ fig.add_trace(go.Candlestick(x=df.index,
                                      low=df['low'],
                                      close=df['close']))
 
+"""
 fig.add_trace(go.Scatter(x=df.index,
                          y=df['200_DAY_SMA'],
                          mode='lines',
                          name='200-day SMA',
                          line=dict(color='orange', width=2)))
+"""
 
 fig.update_layout(title=f"{scalper_algorithm.symbol} Stock Price with 200-Day SMA",
                     xaxis_title="Date",
