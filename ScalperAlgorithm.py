@@ -60,6 +60,7 @@ class ScalperAlgorithm(Algorithm):
     def updateMarketData(self, end_time = datetime.now().date()):
         from datetime import timedelta
         #start_time = end_time - timedelta(days=1)
+        # TODO: have start and end times only be during active trading hours
         start_time = datetime(2025, 2, 21)
         while True:
             #end_time = datetime.now().date()

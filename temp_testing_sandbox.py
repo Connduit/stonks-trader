@@ -10,7 +10,6 @@ import pandas as pd
 from alpaca.trading.requests import GetCalendarRequest
 
 
-
 api_key = config.api_key
 api_secret = config.api_secret
 
