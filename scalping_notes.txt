@@ -1,0 +1,23 @@
+TODO: still need to watch vid2-4
+vid1: https://www.youtube.com/watch?v=XBcMiYK7qYY
+    - only trade with the trend (uptrend - above the 200 day ema)  
+    - only trade when rsi is above 50 by using rsi divergence
+    - (only) trade when there's a bullish engulfing candle
+    - stop loss == 2x the length of the entry candle
+    - take profit == 4x the length of the entry candle (what it actually means is that profit == 2*investment)
+
+
+vid2: https://www.youtube.com/watch?v=ik0YD2soVj0
+   
+
+
+vid3: https://www.youtube.com/watch?v=p1W8Mjl4kWs
+- 10 sec, 1 min, 5 min time frames
+- short term high volitity
+- cut ur losses
+- relative number = 
+- 
+Scanner1: https://www.youtube.com/watch?v=p1W8Mjl4kWs
+    - volume, price, relative voume (daily rate), relative volume minute
+
+vid4: https://www.youtube.com/watch?v=x0Buw7GRedo
