@@ -138,6 +138,9 @@ class ScalperAlgorithm(Algorithm):
     def sellConditions(self):
         # check we that we have an active position
         # sell once we reach X profits or sell once stop loss is triggered
+
+        # TODO: maybe also sell once we encounter a bearish engulfing candle? 
+        # also, if we run into another bullish engulfing candle update our takeProfits and stopLoss marks
         pass
 
     def trade(self):
