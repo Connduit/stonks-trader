@@ -7,6 +7,7 @@ Formula:
 """
 
 from Indicator import Indicator
+import pandas as pd
 
 """
 TODO: stuff needed to find sma
@@ -21,6 +22,7 @@ class SMA(Indicator):
     #def __call__(self, *args, **kwds):
         #return super().__call__(*args, **kwds)
 
-    def __call__(self):
-        pass
+    def __call__(self, length):
+        self.df[f'{length}_DAY_SMA'] = self.df['close'].rolling(window=length).mean()
+        # TODO: return instead of storing?
 

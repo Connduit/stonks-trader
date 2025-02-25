@@ -71,12 +71,16 @@ print(df)
 df['200_DAY_EMA'] = df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
 print(df)
 
-ema = EMA(df)
-ema(200)
-print(ema.df)
+#ema = EMA(df)
+#ema(200)
+#print(ema.df)
 
-print(ema.df.tail(1))
-#scalper_algorithm.trading_client
+#print(ema.df.tail(1))
+#scalper_algorithm.trading_client.
+scalper_algorithm.buyConditions()
+
+# TODO: remove this return
+exit()
 
 import plotly.graph_objects as go
 
