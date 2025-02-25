@@ -41,7 +41,7 @@
 
     TODO: Need to do research on how scalping works
     
-    Super Conservative Scalping Strategy:
+    Super Conservative Scalping Strategy: https://www.youtube.com/watch?v=XBcMiYK7qYY
         - ONLY take positions when the chart is in an up trend and sell after small gains
             - This should result in higher accuracy but smaller/slower growth
             - Start by using 200 day ema to determine trend of the stock (can always fine tune this by using a combination of other indicators)
@@ -55,7 +55,7 @@
 
 ##### Logic
 
-    Strategy:
+    Strategy: https://www.youtube.com/watch?v=ik0YD2soVj0
         - look at what price the stock is most commonly sold at and/or how long it stays at that price to identify support and resistance price points
 
 ### Scanner1
