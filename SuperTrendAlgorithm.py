@@ -124,13 +124,18 @@ class SuperTrendAlgorithm(Algorithm):
         # BUT this just sanitiy checks that we're in an upward trend... i think we still need this tho cuz if ask is below that means its gone against the trend we expected
         if ask_price > super_trend_df["SUPERTl_10_3.0"].iloc[-1]:
             try:
+                # TODO: check if i funds, check if order is already requested from previous run... do this by comparing prices and supertrend
+                # TODO: alpacapy doesn't support trading on weekends even with extended_hours = true.
+                #       solution is to set time_in_force = TimeInForce.OPG  which ensures order is executed at market open
                 order_request_params = MarketOrderRequest(
                                         symbol=self.symbol,
                                         qty=100,
                                         side=OrderSide.BUY,
-                                        time_in_force=TimeInForce.DAY,
+                                        #time_in_force=TimeInForce.DAY,
+                                        time_in_force=TimeInForce.OPG,
                                         take_profit=TakeProfitRequest(limit_price=self.df["Lower_ATR"].iloc[-1]),
-                                        stop_loss=StopLossRequest(stop_price=self.df["Lower_ATR"].iloc[-1])
+                                        stop_loss=StopLossRequest(stop_price=self.df["Lower_ATR"].iloc[-1]),
+                                        extended_hours=True
                                         )
                 order = self.trading_client.submit_order(order_data=order_request_params)
                 print(f'buy order: {order} has been placed')
