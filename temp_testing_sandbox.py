@@ -1,5 +1,6 @@
 from EngulfingCandle import engulfingCandle
 from ScalperAlgorithm import ScalperAlgorithm
+from SuperTrendAlgorithm import SuperTrendAlgorithm
 import config
 from EMA import EMA
 from SMA import SMA
@@ -14,6 +15,7 @@ api_key = config.api_key
 api_secret = config.api_secret
 
 scalper_algorithm = ScalperAlgorithm(api_key, api_secret)
+supertrend_algorithm = SuperTrendAlgorithm(api_key, api_secret)
 day = timedelta(days=365)
 end_time = datetime.now().date()
 start_time = end_time - day
@@ -41,14 +43,20 @@ start_time = end_time - day
 #start_time = datetime(2024, 2, 21) # TODO: hard coded for quick testing purposes... change later
 #end_time = datetime(2025, 2, 21) # TODO: hard coded for quick testing purposes... change later
 
-scalper_algorithm.getMarketData(start_time)
-scalper_algorithm.updateMarketData()
+
+
+#scalper_algorithm.getMarketData(start_time)
+#scalper_algorithm.updateMarketData()
+supertrend_algorithm.getMarketData(start_time)
+#supertrend_algorithm.updateMarketData()
 #print(scalper_algorithm.bars)
 import btalib
-print(scalper_algorithm.bars.df)
+#print(scalper_algorithm.bars.df)
 
-print(scalper_algorithm.df['close'])
+#print(scalper_algorithm.df['close'])
 
+# TODO: this data shouldn't be parsed just for scalper_algorithm cuz it can be reused in other algs?
+"""
 data = {
     'time': [bar[1] for bar in scalper_algorithm.df.index],
     'open': [bar for bar in scalper_algorithm.df.open],
@@ -57,57 +65,96 @@ data = {
     'close': [bar for bar in scalper_algorithm.df.close],
     'volume': [bar for bar in scalper_algorithm.df.volume],
 }
+"""
+"""
+data = {
+    'time': [bar[1] for bar in supertrend_algorithm.df.index],
+    'open': [bar for bar in supertrend_algorithm.df.open],
+    'high': [bar for bar in supertrend_algorithm.df.high],
+    'low': [bar for bar in supertrend_algorithm.df.low],
+    'close': [bar for bar in supertrend_algorithm.df.close],
+    'volume': [bar for bar in supertrend_algorithm.df.volume],
+}
+"""
 
-df = pd.DataFrame(data)
-df['time'] = pd.to_datetime(df['time'])
-df.set_index('time', inplace=True) # sort by time
-print(df)
-length = 200
+#scalper_algorithm_df = pd.DataFrame(data)
+#scalper_algorithm_df['time'] = pd.to_datetime(scalper_algorithm_df['time'])
+#scalper_algorithm_df.set_index('time', inplace=True) # sort by time
+#supertrend_algorithm_df = pd.DataFrame(data)
+#supertrend_algorithm_df['time'] = pd.to_datetime(supertrend_algorithm_df['time'])
+#supertrend_algorithm_df.set_index('time', inplace=True) # sort by time
+print(supertrend_algorithm.df)
+#length = 200
 # SMA Calculation
-df['200_DAY_SMA'] = df['close'].rolling(window=length).mean()
-print(df)
+#df['200_DAY_SMA'] = df['close'].rolling(window=length).mean()
+#print(df)
 
 # EMA Calculation
-df['200_DAY_EMA'] = df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
-print(df)
+#scalper_algorithm_df['200_DAY_EMA'] = scalper_algorithm_df['close'].ewm(span=length, adjust=False).mean() # TODO when adjust=False... data is calculated recursively
+#print(df)
 
 #ema = EMA(df)
 #ema(200)
 #print(ema.df)
 
 #print(ema.df.tail(1))
-#scalper_algorithm.trading_client.
-scalper_algorithm.buyConditions()
+#scalper_algorithm.buyConditions()
+supertrend_algorithm.buyConditions()
+#print(supertrend_algorithm.bars)
+
+#print(supertrend_algorithm.df['buySignal'])
 
 # TODO: remove this return
 
-df = scalper_algorithm.df
+#scalper_algorithm_df = scalper_algorithm.df
 #df.set_index('time', inplace=True) # sort by time
 
 import plotly.graph_objects as go
-
 fig = go.Figure()
-fig.add_trace(go.Candlestick(x=df.index,
-                                     open=df['open'],
-                                     high=df['high'],
-                                     low=df['low'],
-                                     close=df['close']))
+"""
+fig.add_trace(go.Candlestick(x=supertrend_algorithm.df.index,
+                                     open=supertrend_algorithm.df['open'],
+                                     high=supertrend_algorithm.df['high'],
+                                     low=supertrend_algorithm.df['low'],
+                                     close=supertrend_algorithm.df['close']))
+"""
+#fig.update_layout(template="plotly_dark") # DARK_MODE GRAPH
+fig.add_trace(go.Candlestick(x=supertrend_algorithm.df.index,
+                                     open=supertrend_algorithm.df['open'],
+                                     high=supertrend_algorithm.df['high'],
+                                     low=supertrend_algorithm.df['low'],
+                                     close=supertrend_algorithm.df['close'],
+                                     name="Candles"))
+
+fig.add_trace(go.Scatter(x=supertrend_algorithm.df.index,
+                         y=supertrend_algorithm.df['Upper_ATR'],
+                         mode='lines',
+                         name='Upper ATR',
+                         line=dict(color='RED', width=2)))
+
+fig.add_trace(go.Scatter(x=supertrend_algorithm.df.index,
+                         y=supertrend_algorithm.df['Lower_ATR'],
+                         mode='lines',
+                         name='Lower ATR',
+                         line=dict(color='GREEN', width=2)))
+fig.show()
 
 """
-fig.add_trace(go.Scatter(x=df.index,
-                         y=df['200_DAY_SMA'],
-                         mode='lines',
-                         name='200-day SMA',
-                         line=dict(color='orange', width=2)))
-"""
+fig = go.Figure()
+fig.add_trace(go.Candlestick(x=scalper_algorithm_df.index,
+                                     open=scalper_algorithm_df['open'],
+                                     high=scalper_algorithm_df['high'],
+                                     low=scalper_algorithm_df['low'],
+                                     close=scalper_algorithm_df['close']))
+
 
 fig.update_layout(title=f"{scalper_algorithm.symbol} Stock Price with 200-Day SMA",
                     xaxis_title="Date",
                     yaxis_title="Price",
                     xaxis_rangeslider_visible=True)
 
-fig.add_trace(go.Scatter(x=df.index,
-                         y=df['200_DAY_EMA'],
+fig.add_trace(go.Scatter(x=scalper_algorithm_df.index,
+                         y=scalper_algorithm_df['200_DAY_EMA'],
                          mode='lines',
                          name='200-day EMA',
                          line=dict(color='CYAN', width=2)))
@@ -118,3 +165,4 @@ fig.update_layout(title=f"{scalper_algorithm.symbol} Stock Price with 200-Day EM
                     xaxis_rangeslider_visible=True)
 
 fig.show()
+"""
