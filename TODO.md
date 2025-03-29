@@ -58,6 +58,15 @@
     Strategy: https://www.youtube.com/watch?v=ik0YD2soVj0
         - look at what price the stock is most commonly sold at and/or how long it stays at that price to identify support and resistance price points
 
+### ALG4 (Weekly Trends)
+
+#####
+
+    - If the friday high is not as high as the high on thursday, then the friday low will be visited on monday. 
+        - Therefore, short the stock if it opens higher than friday's low on monday and take profits once it reaches that low
+    - If the wednsday high is lower than monday's high, then the wednsday low will be visited on thursday
+        - Therefore, short the stock if it opens higher than wednsday's low and take profits once it reaches that low
+
 ### Scanner1
 
 ##### Strategy
