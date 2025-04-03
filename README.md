@@ -18,4 +18,15 @@
     - https://www.statsmodels.org/stable/index.html (forecasting prices) 
     - https://github.com/bashtage/arch (forecasting volatility)
 
+##### Stuff to Learn
+
+    - Asset Pricing Models – Black-Scholes, CAPM, Fama-French, factor models.
+    - Portfolio Optimization – Modern Portfolio Theory, risk-adjusted returns (Sharpe, Sortino).
+    - Algorithmic Trading Strategies – Momentum, mean reversion, statistical arbitrage, market-making.
+    - Machine Learning in Finance – Random forests, LSTMs for time series, reinforcement learning.
+
+##### Books
+
+    - Quantitative Trading by Ernie Chan
+    - Advances in Financial Machine Learning by Marcos López de Prado.
 
