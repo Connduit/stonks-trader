@@ -24,6 +24,7 @@
     - Portfolio Optimization – Modern Portfolio Theory, risk-adjusted returns (Sharpe, Sortino).
     - Algorithmic Trading Strategies – Momentum, mean reversion, statistical arbitrage, market-making.
     - Machine Learning in Finance – Random forests, LSTMs for time series, reinforcement learning.
+    - Linear Programming and Genetic Algorithms
 
 ##### Books
 
