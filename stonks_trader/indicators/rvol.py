@@ -6,7 +6,7 @@ Formula:
     AverageVolume is the average volume over some period of time
 """
 
-from Indicator import Indicator
+from indicators.indicator import Indicator
 
 class RVOL(Indicator):
     def __init__(self, df):

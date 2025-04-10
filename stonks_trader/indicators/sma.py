@@ -6,7 +6,7 @@ Formula:
     Period == len(Asset_Prices)
 """
 
-from Indicator import Indicator
+from indicators.indicator import Indicator
 import pandas as pd
 
 """

@@ -5,7 +5,7 @@ Formula:
     https://www.investopedia.com/terms/r/rsi.asp
 """
 
-from Indicator import Indicator
+from indicators.indicator import Indicator
 
 class RSI(Indicator):
     def __init__(self, df):

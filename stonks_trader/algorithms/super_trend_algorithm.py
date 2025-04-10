@@ -10,10 +10,10 @@ from alpaca.data.historical import StockHistoricalDataClient
 from alpaca.data.requests import StockBarsRequest, TimeFrame, StockLatestTradeRequest, StockLatestQuoteRequest, StockLatestBarRequest
 from alpaca.trading.enums import OrderSide, TimeInForce, OrderType
 from alpaca.trading.requests import MarketOrderRequest, TakeProfitRequest, StopLossRequest
-from Algorithm import Algorithm
-from EngulfingCandle import engulfingCandle
-from EMA import EMA
-from RSI import RSI
+from algorithms.algorithm import Algorithm
+from indicators.engulfing_candle import engulfingCandle
+from indicators.ema import EMA
+from indicators.rsi import RSI
 
 """
 TODO: There should be a general class (maybe just a data frame?) that gets updated based
