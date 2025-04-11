@@ -60,12 +60,25 @@
 
 ### ALG4 (Weekly Trends)
 
-#####
+##### Logic
 
     - If the friday high is not as high as the high on thursday, then the friday low will be visited on monday. 
         - Therefore, short the stock if it opens higher than friday's low on monday and take profits once it reaches that low
     - If the wednsday high is lower than monday's high, then the wednsday low will be visited on thursday
         - Therefore, short the stock if it opens higher than wednsday's low and take profits once it reaches that low
+
+### ALG5 (Thane Brooker - extreme human high freq)
+
+##### Logic
+    
+    https://www.youtube.com/watch?v=Wv7P0L8Ojnw
+    - AS = First, Fast, Large sellers
+    - AB = First, Fast, Large Buyers 
+    - SS = Sell Stops triggered in the downward direction.
+    - SB = Buy Stops triggered in the upward direction. 
+    
+    - The indicator filters the most important order flow and provides invaluable insight into why price is moving. 
+    - Idea: profit from trapped traders understand which way consolidation is likely to break understand the safest and riskiest times and places to enter a trade 
 
 ### Scanner1
 
